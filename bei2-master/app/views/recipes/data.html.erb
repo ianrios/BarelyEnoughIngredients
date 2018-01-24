@@ -1,0 +1,61 @@
+<%#-this page is the ratings results page -%>
+<body>
+	<div>
+		<%#-the return table is striped for easy viewing and pre assign the width to ensure it fills the space without an excess of line wraparounds-%>
+ 		<table class="table table-striped" width="1000">
+			<thead>
+				<tr><%#-for each item in the recipe database, we display the keys as the table header -%>
+					<% @recipeData[0].keys.each do |recipeElement| %>
+						<th>
+							<% if !(['imageType'].include?(recipeElement))%>
+								<%= recipeElement.capitalize  %>
+								<%#-the elements are capitalized -%>
+							<% end %>
+						</th>
+					<% end %>
+					<th>Rating</th>
+					<%#- we add the rating in the header because it is not gathered from the api -%>
+				</tr>
+			</thead>
+			<tbody>
+				<%#-for each returnable recipe, we sort by whether is is an image or not, and whether or not the item is linkable to a seperate page -%>
+				<% @recipeData.each do |recipe| %>
+					<tr>
+						<% recipe.keys.each do |recipeElement| %>
+							<td>
+								<% if (['f2f_url','source_url','publisher_url'].include?(recipeElement)) %>
+									<a href="<%= recipe[recipeElement] %>">
+										<%= recipe[recipeElement] %>
+						 			</a>
+								<% else %>
+									<% if (['image_url','image'].include?(recipeElement))%>
+										<img src="<%= recipe[recipeElement] %>" height="100" width="100">
+										<%#-this displays an image of the recipe -%>
+									<% else %>
+										<% if !(['imageType'].include?(recipeElement))%>
+											<%= recipe[recipeElement] %>
+											<% if (['title'].include?(recipeElement))%>
+													<%= link_to "(See Steps)", recipes_steps_path %>
+													<%#-this links the page to the specific recipe -%>
+											<% end %>
+										<% end %>
+									<% end %>
+							<% end %>
+							</td>
+						<% end %>
+						<td>
+							<!-- Print out ratings -->
+							<% @recipe_rating = Rating.find_by(recipe_id: recipe['id'].to_i) %>
+								<% if @recipe_rating %>
+									<b><%= @recipe_rating.rating%></b>
+								<% else %>
+								<%#-this links to the rating page -%>
+								<%=link_to "Rate", new_rating_path %>
+							<%end %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</body>

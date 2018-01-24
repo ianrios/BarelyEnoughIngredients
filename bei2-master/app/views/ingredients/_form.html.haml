@@ -1,0 +1,19 @@
+= simple_form_for @ingredient, html: { multipart: true } do |f|
+    - if @ingredient.errors.any?
+        /this section of code is error message handling in the event the ingredient is not saved
+        #errors
+            %p
+                = @ingredient.errors.count
+                Prevented this ingredient from saving
+        
+            %ul
+                - @ingredient.errors.full_messages.each do |msg|
+                    %li= msg
+        /this section of code submits the form
+    .row
+        .panel-body.col-lg-3
+            =f.input :name, input_html: { class: 'form-control' }
+            =f.input :quantity, input_html: { class: 'form-control' }
+    .row
+        .col-lg-5
+            = f.button :submit, class: "btn btn-primary"

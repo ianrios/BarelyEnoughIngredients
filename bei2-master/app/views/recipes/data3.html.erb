@@ -1,0 +1,27 @@
+<%#-this page is the recipe instruction page -%>
+<body>
+	<div>
+		<%#-auto size the table -%>
+<table class="table" width="1000">
+	<thead>
+	<tr><%#-only two columns needed -%>
+			<th>Step #</th>
+			<th>Instruction</th>
+	</tr>
+</thead>
+<tbody>
+	<%#-this displays the proper steps taken from the api for the recipe -%>
+	<% @recipeData.each do |num, step| %>
+		<tr>
+				<td>
+							<%= num  %>
+				</td>
+				<td>
+							<%= step  %>
+				</td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+</div>
+</body>

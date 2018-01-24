@@ -1,0 +1,38 @@
+<body>
+<h1>Rate a Recipe</h1>
+<%#-this page is the adding ratings page -%>
+
+<%= form_for(@rating) do |f| %>
+<div class="row">
+<div class="col-xs-3">
+  <%#-this section is where the recipe ID goes -%>
+  <%= f.label :recipe_id, :class => "input-xlarge" %>
+  <%#-this is the submit button to find the recipe-%>
+  <%= f.text_field :recipe_id, :class => "form-control" %>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-3">
+  <%#-these are the 5 buttons for chosing a rating -%>
+  <div class="radio-inline">
+    <label><%= f.radio_button :rating, 5, checked: true %> 5</label>
+  </div>
+  <div class="radio-inline">
+    <label><%= f.radio_button :rating, 4 %> 4</label>
+  </div>
+  <div class="radio-inline">
+    <label><%= f.radio_button :rating, 3 %> 3</label>
+  </div>
+  <div class="radio-inline">
+    <label><%= f.radio_button :rating, 2 %> 2</label>
+  </div>
+  <div class="radio-inline">
+    <label><%= f.radio_button :rating, 1 %> 1</label>
+  </div>
+  <%#-this is the submit rating button -%>
+  <div class="form-actions"><%= f.submit :class => "btn btn-primary" %></div>
+<% end %>
+</div>
+</div>
+</div>
+</body>

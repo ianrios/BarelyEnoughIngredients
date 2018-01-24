@@ -1,0 +1,8 @@
+/this page determines what to display on the pantry page if a user is signed in
+-if user_signed_in?
+    %h1= @ingredient.name
+    %p= @ingredient.quantity
+
+    = link_to "Back", root_path, class: "btn btn-default"
+    = link_to "Edit", edit_ingredient_path, class: "btn btn-default"
+    = link_to "Delete", ingredient_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"

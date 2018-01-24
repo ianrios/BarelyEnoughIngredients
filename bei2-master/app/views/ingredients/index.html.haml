@@ -1,0 +1,7 @@
+/this logic is to determine what to display if a user is signed in or not.
+-if user_signed_in?
+  %h1 Your Pantry
+  - @ingredient.each do |ingredient|
+    %h2= link_to ingredient.name, ingredient
+-else
+  %h1 Welcome! Sign in to see your pantry
